@@ -1,6 +1,7 @@
 package com.demo.customer;
 
 import com.demo.customer.model.Customer;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -69,6 +70,13 @@ class CustomerApplicationTests {
 		mvc.perform(get("/api/customers/b8a504e8-7cbd-4a54-9a24-dc1832558162"))
 				.andExpect(status().isOk())
 				.andExpect(content().json(getCustomerJsonString()));
+	}
+
+	@Test
+	public void getAllCustomerTest() throws Exception {
+		mvc.perform(get("/api/customers"))
+			.andExpect((status().isOk()))
+				.andExpect(content().json(mapper.writeValueAsString(customerList)));
 	}
 
 }
