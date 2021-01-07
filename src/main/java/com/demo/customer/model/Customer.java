@@ -1,5 +1,7 @@
 package com.demo.customer.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.UUID;
 
 public class Customer {

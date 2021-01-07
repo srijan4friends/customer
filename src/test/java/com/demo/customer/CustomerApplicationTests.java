@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.File;
@@ -88,9 +89,10 @@ class CustomerApplicationTests {
 				"  \"address\": \"1849 Harriet Ave, Auburn, NY 63102\",\n" +
 				"  \"phoneNumber\": \"309-555-1370\"\n" +
 				"}";
-		mvc.perform(post("/api/customers", customerJsonStr))
+		mvc.perform(post("/api/customers").contentType(MediaType.APPLICATION_JSON)
+						.content(customerJsonStr))
 				.andExpect(status().isOk())
-				.andExpect(content().json(customerJsonStr));
+				.andExpect(content().json(customerJsonStr.replace("\"id\":null","\"id\":\"712e2132-affa-4bb6-8d17-b13c16b2c9b3\"")));
 	}
 
 }

@@ -6,9 +6,7 @@ import com.demo.customer.service.CustomerService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,5 +45,18 @@ public class CustomerController {
     @GetMapping("/api/customers")
     public String getAllCustomers() throws JsonProcessingException {
         return mapper.writeValueAsString(customerList);
+    }
+
+    @PostMapping("/api/customers")
+    public String postCustomer(@RequestBody Customer customer) throws JsonProcessingException {
+        customer.setId("712e2132-affa-4bb6-8d17-b13c16b2c9b3");
+        customerList.add(customer);
+
+        for(Customer newCustomer:customerList){
+            if(newCustomer.getId().equalsIgnoreCase(customer.getId())){
+                return mapper.writeValueAsString(newCustomer);
+            }
+        }
+        return null;
     }
 }
