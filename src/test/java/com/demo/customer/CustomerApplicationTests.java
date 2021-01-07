@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -78,6 +79,18 @@ class CustomerApplicationTests {
 		mvc.perform(get("/api/customers"))
 			.andExpect((status().isOk()))
 				.andExpect(content().json(mapper.writeValueAsString(customerList)));
+	}
+	@Test
+	public void postCustomerTest() throws Exception {
+		String customerJsonStr = "{\n" +
+				"  \"firstName\": \"Araminta\",\n" +
+				"  \"lastName\": \"Ross\",\n" +
+				"  \"address\": \"1849 Harriet Ave, Auburn, NY 63102\",\n" +
+				"  \"phoneNumber\": \"309-555-1370\"\n" +
+				"}";
+		mvc.perform(post("/api/customers", customerJsonStr))
+				.andExpect(status().isOk())
+				.andExpect(content().json(customerJsonStr));
 	}
 
 }
