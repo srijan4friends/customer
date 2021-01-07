@@ -25,6 +25,7 @@ public class CustomerController {
 
     @Autowired
     public CustomerController(CustomerService customerService) throws IOException {
+        mapper = new ObjectMapper();
         this.customerList = customerService.loadCustomer();
     }
 
@@ -41,5 +42,10 @@ public class CustomerController {
             }
         }
         return null;
+    }
+
+    @GetMapping("/api/customers")
+    public String getAllCustomers() throws JsonProcessingException {
+        return mapper.writeValueAsString(customerList);
     }
 }

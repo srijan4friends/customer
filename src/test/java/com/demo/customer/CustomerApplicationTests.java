@@ -35,6 +35,7 @@ class CustomerApplicationTests {
 
 	@BeforeEach
 	void setUp() throws IOException {
+		mapper = new ObjectMapper();
 		initializeCustomersData();
 	}
 
