@@ -1,14 +1,12 @@
 package com.demo.customer;
 
 import com.demo.customer.model.Customer;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -18,10 +16,8 @@ import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
 class CustomerApplicationTests {
@@ -61,12 +57,6 @@ class CustomerApplicationTests {
 		return mapper.writeValueAsString(customer);
 	}
 
-	private String createCustomerJsonString() throws IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		File customerFile = new File(newCustomerJsonPath);
-		Customer customer = mapper.readValue(customerFile, Customer.class);
-		return mapper.writeValueAsString(customer);
-	}
 
 	@Test
 	public void getSingleCustomerTest() throws Exception {
