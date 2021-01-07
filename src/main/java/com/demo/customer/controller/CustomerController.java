@@ -19,11 +19,12 @@ public class CustomerController {
 
     List<Customer> customerList;
 
-    @Autowired
+
     public CustomerService customerService;
     ObjectMapper mapper;
 
-    public CustomerController(ArrayList<Customer> customerList) throws IOException {
+    @Autowired
+    public CustomerController(CustomerService customerService) throws IOException {
         this.customerList = customerService.loadCustomer();
     }
 

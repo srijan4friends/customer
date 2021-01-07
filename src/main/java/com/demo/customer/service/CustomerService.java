@@ -3,12 +3,14 @@ package com.demo.customer.service;
 import com.demo.customer.model.Customer;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CustomerService {
 
     ObjectMapper mapper;
